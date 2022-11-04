@@ -9,6 +9,7 @@ import {
   TouchableWithoutFeedback,
   View,
   Keyboard,
+  Alert,
 } from 'react-native';
 import axios from 'axios';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
@@ -35,22 +36,29 @@ const App = () => {
       setSecondUserName('');
       Keyboard.dismiss();
     } else {
-      Keyboard.dismiss();
-      axios
-        .request(options)
-        .then(response => {
-          setPercentage(response.data.percentage);
-          setResult(response.data.result);
-        })
-        .catch(function (error) {
-          console.error(error);
-        });
-      setTemp_FirstUserName(FirstUserName);
-      setTemp_SecondUserName(SecondUserName);
-      setFirstUserName('');
-      setSecondUserName('');
-      setResult('');
-      setPercentage('');
+      if (FirstUserName.toLowerCase() === SecondUserName.toLowerCase()) {
+        Alert.alert('Alert!', 'Both Names are Same!');
+        setFirstUserName('');
+        setSecondUserName('');
+        Keyboard.dismiss();
+      } else {
+        Keyboard.dismiss();
+        axios
+          .request(options)
+          .then(response => {
+            setPercentage(response.data.percentage);
+            setResult(response.data.result);
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
+        setTemp_FirstUserName(FirstUserName);
+        setTemp_SecondUserName(SecondUserName);
+        setFirstUserName('');
+        setSecondUserName('');
+        setResult('');
+        setPercentage('');
+      }
     }
   };
 
@@ -64,7 +72,7 @@ const App = () => {
     } else if (Percentage >= 20) {
       return 60;
     } else {
-      return 40;
+      return 20;
     }
   };
 
@@ -99,7 +107,7 @@ const App = () => {
           <Text style={styles.text}>First Person : {temp_FirstUserName}</Text>
           <Text style={styles.text}>Second Person : {temp_SecondUserName}</Text>
           <Text style={[styles.text, {color: 'red'}]}>
-            Love Percentage: {Percentage}
+            Love Percentage : {Percentage}
           </Text>
           <AntDesignIcon
             style={{
