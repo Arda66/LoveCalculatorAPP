@@ -12,6 +12,7 @@ import {
   Alert,
 } from 'react-native';
 import axios from 'axios';
+import API_KEY from './components/API_KEY';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 const App = () => {
   const [FirstUserName, setFirstUserName] = useState('');
@@ -25,7 +26,7 @@ const App = () => {
     url: 'https://love-calculator.p.rapidapi.com/getPercentage',
     params: {sname: SecondUserName, fname: FirstUserName},
     headers: {
-      'X-RapidAPI-Key': '2f96654e45mshe56a025f08b61c1p185ee7jsn91bf41be4d34',
+      'X-RapidAPI-Key': API_KEY,
       'X-RapidAPI-Host': 'love-calculator.p.rapidapi.com',
     },
   };
@@ -49,7 +50,7 @@ const App = () => {
             setPercentage(response.data.percentage);
             setResult(response.data.result);
           })
-          .catch(function (error) {
+          .catch(error => {
             console.error(error);
           });
         setTemp_FirstUserName(FirstUserName);
@@ -63,17 +64,12 @@ const App = () => {
   };
 
   const HeartSize = () => {
-    if (Percentage >= 80) {
-      return 90;
-    } else if (Percentage >= 60) {
-      return 80;
-    } else if (Percentage >= 40) {
-      return 70;
-    } else if (Percentage >= 20) {
-      return 60;
-    } else {
-      return 20;
-    }
+    if (Percentage >= 80) return 90;
+    else if (Percentage >= 60) return 80;
+    else if (Percentage >= 40) return 70;
+    else if (Percentage >= 20) return 60;
+    else if (Percentage > 0) return 50;
+    else return 0;
   };
 
   return (
