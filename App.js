@@ -14,6 +14,7 @@ import {
 import axios from 'axios';
 import API_KEY from './components/API_KEY';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 const App = () => {
   const [FirstUserName, setFirstUserName] = useState('');
   const [SecondUserName, setSecondUserName] = useState('');
@@ -75,13 +76,11 @@ const App = () => {
   return (
     <SafeAreaView style={styles.container}>
       <TouchableWithoutFeedback
-        style={{flex: 1}}
         onPress={() => {
           Keyboard.dismiss();
         }}>
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          style={{flex: 1}}
           keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}>
           <Text style={styles.title}>Love Calculator</Text>
           <TextInput
@@ -103,7 +102,7 @@ const App = () => {
           <Text style={styles.text}>First Person : {temp_FirstUserName}</Text>
           <Text style={styles.text}>Second Person : {temp_SecondUserName}</Text>
           <Text style={[styles.text, {color: 'red'}]}>
-            Love Percentage : {Percentage}
+            Love Score : {Percentage}
           </Text>
           <AntDesignIcon
             style={{
@@ -114,10 +113,26 @@ const App = () => {
             name="heart"
             color={'red'}
           />
-          <Text style={styles.text}>{Result}</Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottomColor: 'black',
+                borderBottomWidth: 2,
+                paddingBottom: 8,
+                alignSelf: 'center',
+              },
+            ]}>
+            {Result}
+          </Text>
           <View>
             <TouchableOpacity style={styles.button} onPress={Calculate}>
               <Text style={styles.buttonText}>Calculate</Text>
+              <MaterialCommunityIcon
+                name="account-search"
+                size={30}
+                color={'#fff'}
+              />
             </TouchableOpacity>
           </View>
         </KeyboardAvoidingView>
@@ -155,13 +170,15 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   button: {
+    flexDirection: 'row',
     backgroundColor: 'blue',
     padding: 10,
     margin: 20,
     marginTop: 30,
-    width: 200,
+    width: 150,
     alignSelf: 'center',
     borderRadius: 15,
+    justifyContent: 'space-around',
   },
   buttonText: {
     color: 'white',
