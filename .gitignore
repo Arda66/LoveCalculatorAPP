@@ -38,6 +38,8 @@ node_modules/
 npm-debug.log
 yarn-error.log
 
+#Manual adding API key
+components/API_KEY.js
 # BUCK
 buck-out/
 \.buckd/
