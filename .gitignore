@@ -38,8 +38,6 @@ node_modules/
 npm-debug.log
 yarn-error.log
 
-#Manual adding API key
-components/API_KEY.js
 # BUCK
 buck-out/
 \.buckd/
@@ -64,3 +62,4 @@ buck-out/
 # Ruby / CocoaPods
 /ios/Pods/
 /vendor/bundle/
+components/API_KEY.js
